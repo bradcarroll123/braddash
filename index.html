@@ -596,6 +596,18 @@ function openPanel(i){
   });
   if(addRows)p0+='<div class="p-section-label">Add-On Products</div>'+addRows;
 
+  if(r.news){
+    var ntype2=r.news.type==='expansion'?'var(--blue-dark)':r.news.type==='alert'?'var(--amber-dark)':'var(--tx)';
+    var nicon2=r.news.type==='expansion'?'&#128640;':r.news.type==='alert'?'&#9888;':'&#128240;';
+    p0+='<div class="p-section-label">&#128240; News Intel</div>';
+    p0+='<div style="background:rgba(0,122,255,.04);border:1px solid rgba(0,122,255,.15);border-radius:10px;padding:14px 16px;margin-bottom:8px">';
+    p0+='<div style="display:flex;align-items:flex-start;gap:10px">';
+    p0+='<div style="font-size:18px;flex-shrink:0">'+nicon2+'</div>';
+    p0+='<div><div style="font-size:13px;font-weight:600;color:'+ntype2+';margin-bottom:6px">'+r.news.headline+'</div>';
+    p0+='<div style="font-size:12px;color:var(--t2);line-height:1.5;margin-bottom:6px">'+r.news.detail+'</div>';
+    p0+='<div style="font-size:10px;color:var(--t3)">'+r.news.source+' &middot; '+r.news.date+'</div>';
+    p0+='</div></div></div>';
+  }
   if(haveList.length){
     p0+='<div class="p-section-label">Already Has</div><div class="has-grid">';
     haveList.forEach(function(p){p0+='<div class="has-item">'+p+'</div>';});
