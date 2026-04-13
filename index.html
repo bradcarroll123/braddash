@@ -37,11 +37,11 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--off);color:var(--
 .nav-logo span{color:var(--red)}
 .nav-center{flex:1;display:flex;justify-content:center}
 .nav-tabs{display:flex;gap:2px;background:rgba(116,116,128,.12);border-radius:9px;padding:2px}
-.ntab{padding:5px 16px;border-radius:7px;font-size:13px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--t2);font-family:'Inter',sans-serif;transition:all .15s;white-space:nowrap}
+.ntab{padding:5px 12px;border-radius:7px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--t2);font-family:'Inter',sans-serif;transition:all .15s;white-space:nowrap}.news-tab{color:var(--blue-dark)!important}
 .ntab:hover{color:var(--tx)}
 .ntab.active{background:var(--white);color:var(--tx);box-shadow:var(--shadow-sm);font-weight:500}
 .nav-right{display:flex;align-items:center;gap:20px}
-.nav-stat{font-size:12px;color:var(--t3);letter-spacing:-.2px}
+.nav-stat{font-size:11px;color:var(--t3);letter-spacing:-.2px;white-space:nowrap}
 .nav-stat b{color:var(--t2);font-weight:600}
 
 /* TOOLBAR */
@@ -234,14 +234,9 @@ td{padding:14px 20px;vertical-align:middle}
     <div class="nav-tabs">
       <button class="ntab active" onclick="setFilter('all',this)">All</button>
       <button class="ntab" onclick="setFilter('soon',this)">Closing Soon</button>
-      <button class="ntab" onclick="setFilter('prime',this)">Prime</button>
       <button class="ntab" onclick="setFilter('toppriority',this)">Top Priority</button>
       <button class="ntab" onclick="setFilter('upgrades',this)">Upgrades</button>
-      <button class="ntab" onclick="setFilter('green',this)">Healthy</button>
-      <button class="ntab" onclick="setFilter('atrisk',this)">At-Risk</button>
-      <button class="ntab" onclick="setFilter('cold',this)">Gone Cold</button>
-      <button class="ntab" onclick="setFilter('named',this)">Named CSM</button>
-      <button class="ntab" onclick="setFilter('hasnews',this)">&#128240; In the News</button>
+      <button class="ntab news-tab" onclick="setFilter('hasnews',this)">&#128240; In the News</button>
     </div>
   </div>
   <div class="nav-right">
@@ -474,7 +469,7 @@ function initStats(){
     if(upgTotal(r)>0)upg++;
     if(r.mrr)bookMrr+=r.mrr;
   });
-  var wsS='$'+(ws/1000000).toFixed(2)+'M';
+  var wsS='$'+(ws/1000).toFixed(0)+'K';
   document.getElementById('nws').textContent=wsS;
   document.getElementById('nsoon').textContent=soon;
   document.getElementById('nprime').textContent=prime;
