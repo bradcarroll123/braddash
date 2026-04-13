@@ -228,6 +228,81 @@ td{padding:14px 20px;vertical-align:middle}
 .p-legend{display:flex;align-items:center;gap:20px;padding:8px 28px;background:var(--off);border-bottom:1px solid var(--bd-light);flex-shrink:0;flex-wrap:wrap}
 .leg-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--t2);white-space:nowrap}
 .leg-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+
+/* ============================================
+   MOBILE RESPONSIVE — 768px and below
+   ============================================ */
+@media (max-width: 768px) {
+
+  /* NAV — stack logo + tabs */
+  .nav {
+    height: auto;
+    flex-wrap: wrap;
+    padding: 10px 14px 6px;
+    gap: 6px;
+  }
+  .nav-center { order: 3; width: 100%; justify-content: flex-start; overflow-x: auto; padding-bottom: 2px; }
+  .nav-tabs { gap: 1px; }
+  .ntab { padding: 4px 9px; font-size: 11px; }
+  .nav-right { order: 2; margin-left: auto; gap: 10px; }
+  .nav-stat { display: none; }
+
+  /* TOOLBAR — stack search + controls */
+  .toolbar { flex-wrap: wrap; height: auto; padding: 8px 14px; gap: 8px; }
+  .search-wrap { flex: 1 1 100%; }
+  .tb-sep { display: none; }
+  .sort-sel { flex: 1; }
+  .row-count { font-size: 11px; }
+
+  /* STATUS BAR */
+  .status-bar { padding: 0 14px; gap: 12px; flex-wrap: wrap; height: auto; padding-top: 6px; padding-bottom: 6px; }
+  .sb-item { font-size: 10px; }
+
+  /* TABLE */
+  table { min-width: unset; width: 100%; }
+  thead th, tbody td { padding: 10px 12px; }
+
+  /* Hide heavy columns on mobile */
+  th:nth-child(4), td:nth-child(4),
+  th:nth-child(5), td:nth-child(5),
+  th:nth-child(6), td:nth-child(6),
+  th:nth-child(8), td:nth-child(8),
+  th:nth-child(9), td:nth-child(9)
+  { display: none; }
+
+  .acct-name { font-size: 13px; }
+  .acct-loc { font-size: 11px; }
+  .ws-amt { font-size: 13px; }
+  .loc-num { font-size: 13px; }
+  .prod-row { gap: 3px; }
+  .ppill { font-size: 10px; padding: 2px 7px; }
+
+  /* PANEL — full screen on mobile */
+  .panel { width: 100% !important; top: 0; left: 0; right: 0; bottom: 0; border-radius: 0; }
+  .p-hdr { padding: 20px 18px 0; }
+  .p-name { font-size: 18px; }
+  .p-meta { font-size: 12px; }
+  .p-actions { flex-wrap: wrap; }
+  .p-stats { grid-template-columns: repeat(2, 1fr); }
+  .p-stat { padding: 12px 16px; }
+  .p-stat-v { font-size: 18px; }
+  .p-ren { margin: 12px 18px; }
+  .p-tabs { padding: 0 18px; overflow-x: auto; }
+  .p-tab { font-size: 12px; margin-right: 16px; white-space: nowrap; }
+  .p-body { padding: 16px 18px 36px; }
+
+  .p-legend { display: none; }
+
+  .pitch-item { flex-wrap: wrap; gap: 8px; }
+  .pitch-right { width: 100%; text-align: left; }
+}
+
+@media (max-width: 400px) {
+  .nav-tabs { overflow-x: auto; }
+  .ntab { font-size: 10px; padding: 4px 7px; }
+  th:nth-child(3), td:nth-child(3) { display: none; }
+}
+
 </style>
 </head>
 <body>
