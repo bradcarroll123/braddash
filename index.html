@@ -235,15 +235,17 @@ td{padding:14px 20px;vertical-align:middle}
 .leg-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--t2);white-space:nowrap}
 .leg-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 
-/* ============================================
-   MOBILE RESPONSIVE — 768px and below
-   ============================================ */
+
+/* ==============================================
+   MOBILE RESPONSIVE
+   ============================================== */
 @media (max-width: 768px) {
+
   /* NAV */
-  .nav { height: auto; flex-wrap: wrap; padding: 0 16px; gap: 0; }
+  .nav { height: auto; flex-wrap: wrap; padding: 0 16px; }
   .nav-logo { order: 1; padding: 12px 0 10px; font-size: 14px; }
   .nav-logo-icon { width: 26px; height: 26px; font-size: 12px; }
-  .nav-right { order: 2; margin-left: auto; gap: 6px; padding: 12px 0 10px; }
+  .nav-right { order: 2; margin-left: auto; padding: 12px 0 10px; gap: 6px; }
   .nav-stat { font-size: 10px; padding: 3px 8px; }
   .nav-center { order: 3; width: 100%; border-top: 1px solid var(--bd-light); overflow-x: auto; scrollbar-width: none; }
   .nav-center::-webkit-scrollbar { display: none; }
@@ -255,9 +257,9 @@ td{padding:14px 20px;vertical-align:middle}
   .search-wrap { flex: 1 1 100%; }
   .tb-sep { display: none; }
   .sort-sel { flex: 1; font-size: 12px; }
-  .row-count { font-size: 11px; white-space: nowrap; }
+  .row-count { font-size: 11px; }
 
-  /* STATUS BAR — horizontal scroll strip */
+  /* STATUS BAR */
   .status-bar { height: auto; padding: 10px 16px; overflow-x: auto; scrollbar-width: none; flex-wrap: nowrap; }
   .status-bar::-webkit-scrollbar { display: none; }
   .sb-metric { flex-shrink: 0; padding: 0 16px 0 0; }
@@ -266,61 +268,116 @@ td{padding:14px 20px;vertical-align:middle}
   .sb-divider { flex-shrink: 0; margin: 0 16px 0 0; }
   .sb-right { display: none; }
 
-  /* TABLE — card-like rows */
+  /* TABLE */
   .table-scroll { overflow-x: hidden; }
   table { min-width: unset; width: 100%; }
-  thead th { padding: 8px 16px; font-size: 9px; letter-spacing: .7px; }
+  thead th { padding: 8px 16px; font-size: 9px; }
   tbody td { padding: 12px 16px; }
-
-  /* Show only: Account, Health, WS */
-  th:nth-child(3), td:nth-child(3),   /* Locations */
-  th:nth-child(4), td:nth-child(4),   /* Renewal */
-  th:nth-child(5), td:nth-child(5),   /* Accounting */
-  th:nth-child(6), td:nth-child(6),   /* Operations */
-  th:nth-child(7), td:nth-child(7),   /* Pitch */
-  th:nth-child(8), td:nth-child(8),   /* Polling */
-  th:nth-child(9), td:nth-child(9)    /* Opportunity (shown as last) */
-  { display: none; }
-
-  /* Re-show Opportunity as last column */
+  th:nth-child(3), td:nth-child(3),
+  th:nth-child(4), td:nth-child(4),
+  th:nth-child(5), td:nth-child(5),
+  th:nth-child(6), td:nth-child(6),
+  th:nth-child(7), td:nth-child(7),
+  th:nth-child(8), td:nth-child(8),
+  th:nth-child(9), td:nth-child(9) { display: none; }
   th:last-child, td:last-child { display: table-cell; }
-
   .acct-name { font-size: 13px; max-width: 180px; }
-  .acct-loc { font-size: 10px; margin-top: 2px; }
+  .acct-loc { font-size: 10px; }
   .ws-amt { font-size: 14px; }
-  .risk-dot { font-size: 11px; gap: 5px; }
   .dot { width: 7px; height: 7px; }
 
-  /* PANEL — full screen slide up */
-  .panel { width: 100% !important; top: auto; left: 0; right: 0; bottom: 0; height: 92vh; border-radius: 16px 16px 0 0; transform: translateY(100%); }
+  /* PANEL — bottom sheet */
+  .panel {
+    width: 100% !important;
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 91vh;
+    border-radius: 16px 16px 0 0;
+    transform: translateY(100%);
+    overflow: hidden;
+  }
   .panel.open { transform: translateY(0); }
-  .p-hdr { padding: 8px 18px 0; }
-  .p-hdr::before { content: ''; display: block; width: 36px; height: 4px; background: var(--bd); border-radius: 2px; margin: 0 auto 14px; }
-  .p-name { font-size: 17px; }
-  .p-meta { font-size: 12px; }
-  .p-actions { flex-wrap: wrap; gap: 6px; }
-  .p-act { font-size: 11px; padding: 5px 12px; }
-  .p-stats { grid-template-columns: repeat(2, 1fr); }
+
+  /* Drag handle */
+  .p-hdr::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 4px;
+    background: var(--bd);
+    border-radius: 2px;
+    margin: 10px auto 0;
+  }
+
+  /* Panel header — tighter */
+  .p-hdr { padding: 6px 16px 0; }
+  .p-close { margin-top: 0; }
+  .p-name { font-size: 16px; line-height: 1.3; margin-top: 8px; margin-bottom: 3px; padding-right: 36px; }
+  .p-meta { font-size: 12px; line-height: 1.4; }
+  .p-csm { font-size: 11px; }
+
+  /* Action buttons — wrap + smaller */
+  .p-actions { flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .p-act { font-size: 11px; padding: 5px 12px; border-radius: 7px; }
+
+  /* Stats grid — 2 col */
+  .p-stats { grid-template-columns: 1fr 1fr; margin-top: 14px; }
   .p-stat { padding: 10px 14px; }
-  .p-stat-v { font-size: 17px; }
   .p-stat-l { font-size: 9px; }
-  .p-ren { margin: 10px 18px; }
-  .p-tabs { padding: 0 18px; overflow-x: auto; scrollbar-width: none; }
+  .p-stat-v { font-size: 18px; }
+
+  /* Renewal strip */
+  .p-ren { margin: 10px 16px; padding: 10px 14px; }
+  .p-ren-body b { font-size: 12px; }
+  .p-ren-body span { font-size: 11px; }
+
+  /* Panel tabs — scroll horizontally */
+  .p-tabs { padding: 0 16px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .p-tabs::-webkit-scrollbar { display: none; }
-  .p-tab { font-size: 12px; margin-right: 14px; white-space: nowrap; padding: 10px 0 8px; }
-  .p-body { padding: 14px 18px 40px; }
-  .p-legend { display: none; }
-  .pitch-item { padding: 10px 0; }
+  .p-tab { font-size: 12px; margin-right: 16px; padding: 10px 0 8px; white-space: nowrap; }
+
+  /* Panel body */
+  .p-body { padding: 14px 16px 48px; }
+
+  /* Pitch items */
+  .pitch-item { padding: 10px 0; gap: 10px; flex-wrap: wrap; }
   .pitch-title { font-size: 13px; }
   .pitch-desc { font-size: 11px; }
+  .pitch-right { width: 100%; text-align: left; border-top: 1px solid var(--bd-light); padding-top: 6px; margin-top: 2px; }
+  .pitch-type { display: inline; margin-right: 6px; }
+  .pitch-val { font-size: 14px; }
+
+  /* Section labels */
+  .p-section-label { font-size: 10px; margin-top: 18px; }
+
+  /* Contacts */
+  .c-row { flex-direction: column; gap: 4px; }
   .c-name { font-size: 13px; }
   .c-title { font-size: 11px; }
+  .c-btns { gap: 5px; margin-top: 8px; }
   .c-btn { font-size: 11px; padding: 5px 11px; }
+
+  /* Email pane */
+  .e-body { font-size: 12px; min-height: 160px; }
+  .e-subject-val { font-size: 13px; }
+
+  /* News card */
+  .news-card { padding: 12px 14px; }
+
+  /* Has grid */
+  .has-item { font-size: 11px; padding: 3px 10px; }
+
+  /* Legend hidden */
+  .p-legend { display: none; }
 }
 
 @media (max-width: 400px) {
-  .ntab { font-size: 11px; padding: 10px 11px 8px; }
+  .ntab { font-size: 11px; padding: 10px 10px 8px; }
   .acct-name { max-width: 140px; }
+  .p-stat-v { font-size: 16px; }
+  .p-name { font-size: 15px; }
 }
 
 </style>
