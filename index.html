@@ -465,7 +465,7 @@ function render(){
     h+='<td><div class="acct-name">'+r.n+coldBadge+newsBadge+'</div><div class="acct-loc">'+r.ci+', '+r.st+'</div></td>';
     h+='<td><div class="risk-dot '+riskTxtCls+'"><span class="dot '+dotCls+'"></span>'+r.risk+'</div></td>';
     h+='<td><div class="loc-num">'+r.loc+'</div><div class="pos-txt">'+r.pos+'</div></td>';
-    h+='<td>'+(r.poll!==undefined&&r.poll!==null?'<span style="font-weight:600;color:'+(r.poll===0?'var(--red)':'var(--tx)')+'">'+r.poll+'</span><span style="font-size:10px;color:var(--t3)">/'+r.loc+'</span>':'<span style="color:var(--t3)">—</span>')+'</td>';
+    h+='<td>'+(r.poll!==undefined&&r.poll!==null?r.poll:'—')+'</td>';
     h+='<td><div class="ren-date">'+(r.renewal||'&mdash;')+'</div>'+renTag+'</td>';
     h+='<td>'+pkgLabel(r.acct_pkg)+'</td>';
     h+='<td>'+pkgLabel(r.ops_pkg)+'</td>';
