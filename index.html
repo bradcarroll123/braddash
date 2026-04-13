@@ -531,7 +531,8 @@ function openPanel(i){
   var billingStr=r.billing_frequency?r.billing_frequency+' billing':'';  document.getElementById('pcsm').textContent=(r.csm?'CSM: '+r.csm:'')+(r.csm&&billingStr?' \xb7 ':'' )+(billingStr||'');
   var links='';
   if(r.website)links+='<a class="p-act primary" href="'+r.website+'" target="_blank" rel="noopener">Website</a>';
-  links+='<a class="p-act" href="https://www.google.com/search?q='+encodeURIComponent(r.n+' restaurant news')+'" target="_blank" rel="noopener">Research</a>';
+  links+='<a class="p-act" href="https://news.google.com/search?q='+encodeURIComponent(r.n+' restaurant')+'" target="_blank" rel="noopener">&#128240; News</a>';
+  links+='<a class="p-act" href="https://www.google.com/search?q='+encodeURIComponent(r.n+' restaurant new location opening 2025 2026')+'" target="_blank" rel="noopener">&#128269; Expansion</a>';
   links+='<a class="p-act" href="https://www.linkedin.com/search/results/companies/?keywords='+encodeURIComponent(r.n)+'" target="_blank" rel="noopener">LinkedIn</a>';
   document.getElementById('pa').innerHTML=links;
 
@@ -730,6 +731,14 @@ function openPanel(i){
   });
   prep+='</div></div>';
   prep+='</div>';
+  // Add news search links at bottom of call prep
+  prep+='<div><div class="p-section-label">Quick Research</div>';
+  prep+='<div style="display:flex;gap:8px;flex-wrap:wrap">';
+  prep+='<a class="p-act" href="https://news.google.com/search?q='+encodeURIComponent(r.n+' restaurant')+'" target="_blank" rel="noopener" style="text-decoration:none">&#128240; Google News</a>';
+  prep+='<a class="p-act" href="https://www.google.com/search?q='+encodeURIComponent(r.n+' restaurant new location opening expansion 2026')+'" target="_blank" rel="noopener" style="text-decoration:none">&#128205; Expansion News</a>';
+  prep+='<a class="p-act" href="https://www.google.com/search?q='+encodeURIComponent(r.n+' restaurant')+'" target="_blank" rel="noopener" style="text-decoration:none">&#128269; Google Search</a>';
+  prep+='<a class="p-act" href="https://www.linkedin.com/search/results/companies/?keywords='+encodeURIComponent(r.n)+'" target="_blank" rel="noopener" style="text-decoration:none">LinkedIn</a>';
+  prep+='</div></div>';
   document.getElementById('pp4').innerHTML=prep;
 
   pTab(0);
