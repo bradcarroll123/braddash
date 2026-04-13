@@ -202,6 +202,13 @@ td{padding:14px 20px;vertical-align:middle}
 
 .empty-state{text-align:center;padding:80px 20px;color:var(--t3);font-size:14px}
 .no-contacts{font-size:13px;color:var(--t3);padding:20px 0}
+.fit-reason{font-size:11px;margin-top:4px;padding:3px 8px;border-radius:5px;display:inline-block;font-weight:500}
+.fr-good{background:rgba(48,209,88,.08);color:#1a7f37}
+.fr-ok{background:rgba(255,159,10,.08);color:#7d4e00}
+.fr-no{background:rgba(255,59,48,.08);color:#c0392b}
+.p-legend{display:flex;align-items:center;gap:20px;padding:8px 28px;background:var(--off);border-bottom:1px solid var(--bd-light);flex-shrink:0;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--t2);white-space:nowrap}
+.leg-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 </style>
 </head>
 <body>
@@ -283,6 +290,11 @@ td{padding:14px 20px;vertical-align:middle}
     <button class="p-tab active" id="pt0" onclick="pTab(0)">Pitch</button>
     <button class="p-tab" id="pt1" onclick="pTab(1)">Contacts</button>
     <button class="p-tab" id="pt2" onclick="pTab(2)">Email</button>
+  </div>
+  <div class="p-legend">
+    <span class="leg-item"><span class="leg-dot" style="background:var(--green)"></span>Good fit &mdash; pitch with confidence</span>
+    <span class="leg-item"><span class="leg-dot" style="background:var(--amber)"></span>Okay fit &mdash; worth mentioning</span>
+    <span class="leg-item"><span class="leg-dot" style="background:var(--red)"></span>Low fit &mdash; skip for now</span>
   </div>
   <div class="p-body">
     <div class="ppane active" id="pp0"></div>
@@ -427,6 +439,41 @@ function initStats(){
   document.getElementById('su').textContent=upg;
 }
 
+function fitReasonCls(f){return f===2?'fr-good':f===1?'fr-ok':'fr-no';}
+function fitReason(f,prod,ap,op){
+  ap=ap||'None';op=op||'None';
+  var hasAcct=ap!=='None';
+  var isCore=ap.indexOf('Core')>=0;
+  var isEssAcct=ap.indexOf('Essential')>=0||ap.indexOf('Legacy')>=0;
+  var isProAcct=ap.indexOf('Professional')>=0&&ap.indexOf('Accounting')>=0;
+  var hasOps=op!=='None';
+  var isEssOps=op.indexOf('Essential Operations')>=0;
+  var isProOps=op.indexOf('Professional Operations')>=0;
+  if(f===2){
+    if(prod==='Alliance Payroll')return 'No payroll integration detected — high chance of manual double-entry today';
+    if(prod==='Task Management')return 'Multi-location operator with no task visibility tool';
+    if(prod==='ExpandShare')return 'No training platform on file — likely using manual onboarding';
+    if(prod==='R365 Hire')return 'No ATS detected — likely posting jobs manually';
+    if(prod==='Intelligence')return 'No real-time reporting — flying blind mid-shift';
+    if(prod==='Essential Accounting')return 'On Core tier — natural next step, Capture AI unlocks significant AP time savings';
+    if(prod==='Professional Accounting')return 'Has accounting but not Pro — CFR and Fixed Assets are high-value unlocks';
+    if(prod==='Essential Operations')return 'No ops package — food cost and inventory management are the biggest ROI on the platform';
+    if(prod==='Professional Operations')return 'On Essential Ops — labor matrix and intraday polling are the logical upgrade';
+    if(prod==='Custom Financial Reporting')return 'Has accounting but not Professional — CFR is a high-value upgrade';
+    if(prod==='Fixed Assets')return 'Has accounting without fixed asset tracking — likely managing manually';
+    if(prod==='Scheduling'||prod==='Inventory & Purchasing'||prod==='Recipe Costing'||prod==='Manager Log')return 'No ops package on file — strong upsell foundation';
+    return 'Strong match based on current package tier';
+  }
+  if(f===1){
+    if(prod==='Tip Automation')return 'Depends on service model — confirm they do tip pooling before pitching';
+    if(prod==='Intraday Polling'||prod==='Smart Labor')return 'Available upgrade — confirm they are actively using Essential Ops first';
+    if(prod==='Essential Accounting')return 'No accounting detected — may be a prospect not a cross-sell';
+    if(prod==='Professional Operations')return 'Not on Essential Ops yet — lead with Essential before pitching Pro';
+    return 'Relevant but confirm fit with the customer before leading with this';
+  }
+  if(prod==='Accounting')return 'Already has an accounting package — skip this pitch';
+  return 'Low fit based on current package — not recommended at this time';
+}
 function openPanel(i){
   var r=rows[i];
   var contacts=CONTACTS[r.n]||[];
@@ -469,11 +516,11 @@ function openPanel(i){
   var upgRows='';
   (r.acct_upgrades||[]).forEach(function(u){
     var f=productFit(u.to,r.acct_pkg,r.ops_pkg);
-    upgRows+='<div class="pitch-item type-upg"><div class="fit-indicator '+fitCls(f)+'"></div><div class="pitch-content"><div class="pitch-title">'+u.to+'</div><div class="pitch-desc">'+(PITCH[u.to]||'')+'</div></div><div class="pitch-right"><div class="pitch-type">Package Upgrade</div><div class="pitch-val">+$'+u.total+'/mo</div></div></div>';
+    upgRows+='<div class="pitch-item type-upg"><div class="fit-indicator '+fitCls(f)+'"></div><div class="pitch-content"><div class="pitch-title">'+u.to+'</div><div class="pitch-desc">'+(PITCH[u.to]||'')+'</div><div class="fit-reason '+fitReasonCls(f)+'">'+fitReason(f,u.to,r.acct_pkg,r.ops_pkg)+'</div></div><div class="pitch-right"><div class="pitch-type">Package Upgrade</div><div class="pitch-val">+$'+u.total+'/mo</div></div></div>';
   });
   (r.ops_upgrades||[]).forEach(function(u){
     var f=productFit(u.to,r.acct_pkg,r.ops_pkg);
-    upgRows+='<div class="pitch-item type-upg"><div class="fit-indicator '+fitCls(f)+'"></div><div class="pitch-content"><div class="pitch-title">'+u.to+'</div><div class="pitch-desc">'+(PITCH[u.to]||'')+'</div></div><div class="pitch-right"><div class="pitch-type">Package Upgrade</div><div class="pitch-val">+$'+u.total+'/mo</div></div></div>';
+    upgRows+='<div class="pitch-item type-upg"><div class="fit-indicator '+fitCls(f)+'"></div><div class="pitch-content"><div class="pitch-title">'+u.to+'</div><div class="pitch-desc">'+(PITCH[u.to]||'')+'</div><div class="fit-reason '+fitReasonCls(f)+'">'+fitReason(f,u.to,r.acct_pkg,r.ops_pkg)+'</div></div><div class="pitch-right"><div class="pitch-type">Package Upgrade</div><div class="pitch-val">+$'+u.total+'/mo</div></div></div>';
   });
   if(upgRows)p0+='<div class="p-section-label">Package Upgrades</div>'+upgRows;
 
@@ -483,7 +530,7 @@ function openPanel(i){
     var f=productFit(p,r.acct_pkg,r.ops_pkg);
     var tc=isKey?'type-pri':'type-sec';
     var tl=isKey?'Priority':'Secondary';
-    addRows+='<div class="pitch-item '+tc+'"><div class="fit-indicator '+fitCls(f)+'"></div><div class="pitch-content"><div class="pitch-title">'+p+'</div><div class="pitch-desc">'+(PITCH[p]||'')+'</div></div><div class="pitch-right"><div class="pitch-type">'+tl+'</div><div class="pitch-val">+$'+v.toLocaleString()+'/yr</div></div></div>';
+    addRows+='<div class="pitch-item '+tc+'"><div class="fit-indicator '+fitCls(f)+'"></div><div class="pitch-content"><div class="pitch-title">'+p+'</div><div class="pitch-desc">'+(PITCH[p]||'')+'</div><div class="fit-reason '+fitReasonCls(f)+'">'+fitReason(f,p,r.acct_pkg,r.ops_pkg)+'</div></div><div class="pitch-right"><div class="pitch-type">'+tl+'</div><div class="pitch-val">+$'+v.toLocaleString()+'/yr</div></div></div>';
   });
   if(addRows)p0+='<div class="p-section-label">Add-On Products</div>'+addRows;
 
