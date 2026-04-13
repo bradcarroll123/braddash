@@ -115,6 +115,7 @@ td{padding:14px 20px;vertical-align:middle}
 .p-close:hover{background:var(--bd-light)}
 .p-name{font-size:22px;font-weight:700;letter-spacing:-.5px;line-height:1.2;margin-bottom:4px;overflow:hidden}
 .p-meta{font-size:13px;color:var(--t2);line-height:1.5}
+.p-csm{font-size:12px;color:var(--t3);margin-top:3px;font-weight:500}
 .p-actions{display:flex;gap:8px;margin-top:16px}
 .p-act{font-size:12px;font-weight:500;padding:6px 14px;border-radius:8px;text-decoration:none;border:1px solid var(--bd-light);color:var(--t2);background:var(--off);transition:all .12s;cursor:pointer;font-family:'Inter',sans-serif}
 .p-act:hover{background:var(--bd-light);color:var(--tx)}
@@ -297,6 +298,7 @@ td{padding:14px 20px;vertical-align:middle}
     <button class="p-close" onclick="closePanel()">&#x2715;</button>
     <div class="p-name" id="pn"></div>
     <div class="p-meta" id="pm"></div>
+    <div class="p-csm" id="pcsm"></div>
     <div class="p-actions" id="pa"></div>
   </div>
   <div class="p-stats" id="ps"></div>
@@ -515,6 +517,7 @@ function openPanel(i){
   document.getElementById('pn').textContent=r.n;
   document.getElementById('pm').textContent=r.ci+', '+r.st+' · '+r.loc+' location'+(r.loc>1?'s':'')+' · '+r.pos+' · Since '+r.cs;
 
+  document.getElementById('pcsm').textContent=r.csm?'CSM: '+r.csm:'';
   var links='';
   if(r.website)links+='<a class="p-act primary" href="'+r.website+'" target="_blank" rel="noopener">Website</a>';
   links+='<a class="p-act" href="https://www.google.com/search?q='+encodeURIComponent(r.n+' restaurant news')+'" target="_blank" rel="noopener">Research</a>';
