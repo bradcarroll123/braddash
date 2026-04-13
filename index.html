@@ -492,29 +492,29 @@ function fitReason(f,prod,ap,op){
   var isEssOps=op.indexOf('Essential Operations')>=0;
   var isProOps=op.indexOf('Professional Operations')>=0;
   if(f===2){
-    if(prod==='Alliance Payroll')return 'No payroll integration detected — high chance of manual double-entry today';
+    if(prod==='Alliance Payroll')return 'No payroll integration detected -- high chance of manual double-entry today';
     if(prod==='Task Management')return 'Multi-location operator with no task visibility tool';
-    if(prod==='ExpandShare')return 'No training platform on file — likely using manual onboarding';
-    if(prod==='R365 Hire')return 'No ATS detected — likely posting jobs manually';
-    if(prod==='Intelligence')return 'No real-time reporting — flying blind mid-shift';
-    if(prod==='Essential Accounting')return 'On Core tier — natural next step, Capture AI unlocks significant AP time savings';
-    if(prod==='Professional Accounting')return 'Has accounting but not Pro — CFR and Fixed Assets are high-value unlocks';
-    if(prod==='Essential Operations')return 'No ops package — food cost and inventory management are the biggest ROI on the platform';
-    if(prod==='Professional Operations')return 'On Essential Ops — labor matrix and intraday polling are the logical upgrade';
-    if(prod==='Custom Financial Reporting')return 'Has accounting but not Professional — CFR is a high-value upgrade';
-    if(prod==='Fixed Assets')return 'Has accounting without fixed asset tracking — likely managing manually';
-    if(prod==='Scheduling'||prod==='Inventory & Purchasing'||prod==='Recipe Costing'||prod==='Manager Log')return 'No ops package on file — strong upsell foundation';
+    if(prod==='ExpandShare')return 'No training platform on file -- likely using manual onboarding';
+    if(prod==='R365 Hire')return 'No ATS detected -- likely posting jobs manually';
+    if(prod==='Intelligence')return 'No real-time reporting -- flying blind mid-shift';
+    if(prod==='Essential Accounting')return 'On Core tier -- natural next step, Capture AI unlocks significant AP time savings';
+    if(prod==='Professional Accounting')return 'Has accounting but not Pro -- CFR and Fixed Assets are high-value unlocks';
+    if(prod==='Essential Operations')return 'No ops package -- food cost and inventory management are the biggest ROI on the platform';
+    if(prod==='Professional Operations')return 'On Essential Ops -- labor matrix and intraday polling are the logical upgrade';
+    if(prod==='Custom Financial Reporting')return 'Has accounting but not Professional -- CFR is a high-value upgrade';
+    if(prod==='Fixed Assets')return 'Has accounting without fixed asset tracking -- likely managing manually';
+    if(prod==='Scheduling'||prod==='Inventory & Purchasing'||prod==='Recipe Costing'||prod==='Manager Log')return 'No ops package on file -- strong upsell foundation';
     return 'Strong match based on current package tier';
   }
   if(f===1){
-    if(prod==='Tip Automation')return 'Depends on service model — confirm they do tip pooling before pitching';
-    if(prod==='Intraday Polling'||prod==='Smart Labor')return 'Available upgrade — confirm they are actively using Essential Ops first';
-    if(prod==='Essential Accounting')return 'No accounting detected — may be a prospect not a cross-sell';
-    if(prod==='Professional Operations')return 'Not on Essential Ops yet — lead with Essential before pitching Pro';
+    if(prod==='Tip Automation')return 'Depends on service model -- confirm they do tip pooling before pitching';
+    if(prod==='Intraday Polling'||prod==='Smart Labor')return 'Available upgrade -- confirm they are actively using Essential Ops first';
+    if(prod==='Essential Accounting')return 'No accounting detected -- may be a prospect not a cross-sell';
+    if(prod==='Professional Operations')return 'Not on Essential Ops yet -- lead with Essential before pitching Pro';
     return 'Relevant but confirm fit with the customer before leading with this';
   }
-  if(prod==='Accounting')return 'Already has an accounting package — skip this pitch';
-  return 'Low fit based on current package — not recommended at this time';
+  if(prod==='Accounting')return 'Already has an accounting package -- skip this pitch';
+  return 'Low fit based on current package -- not recommended at this time';
 }
 function openPanel(i){
   var r=rows[i];
@@ -526,9 +526,9 @@ function openPanel(i){
   var upg=upgTotal(r);
 
   document.getElementById('pn').textContent=r.n;
-  document.getElementById('pm').textContent=r.ci+', '+r.st+' · '+r.loc+' location'+(r.loc>1?'s':'')+' · '+r.pos+' · Since '+r.cs;
+  document.getElementById('pm').textContent=r.ci+', '+r.st+' \xb7 '+r.loc+' location'+(r.loc>1?'s':'')+' \xb7 '+r.pos+' \xb7 Since '+r.cs;
 
-  var billingStr=r.billing_frequency?r.billing_frequency+' billing':'';  document.getElementById('pcsm').textContent=(r.csm?'CSM: '+r.csm:'')+(r.csm&&billingStr?' · ':'' )+(billingStr||'');
+  var billingStr=r.billing_frequency?r.billing_frequency+' billing':'';  document.getElementById('pcsm').textContent=(r.csm?'CSM: '+r.csm:'')+(r.csm&&billingStr?' \xb7 ':'' )+(billingStr||'');
   var links='';
   if(r.website)links+='<a class="p-act primary" href="'+r.website+'" target="_blank" rel="noopener">Website</a>';
   links+='<a class="p-act" href="https://www.google.com/search?q='+encodeURIComponent(r.n+' restaurant news')+'" target="_blank" rel="noopener">Research</a>';
@@ -551,9 +551,9 @@ function openPanel(i){
   var renCls={soon:'soon',future:'future',closed:'closed',past:'closed',unknown:'unknown'}[r.urgency]||'unknown';
   var renIcon={soon:'&#9888;&#xFE0F;',future:'&#128197;',closed:'&#128274;',past:'&#128274;',unknown:''}[r.urgency]||'';
   var renMsg={
-    soon:'<b>Renewal window closing — '+r.dtd+' days left</b><span>Changes must be signed before '+r.renewal+'</span>',
-    future:'<b>Renews '+r.renewal+'</b><span>'+r.dtd+' days away — begin conversations 90 days out</span>',
-    closed:'<b>Window closed this cycle</b><span>Renews '+r.renewal+' — plan for next cycle</span>',
+    soon:'<b>Renewal window closing -- '+r.dtd+' days left</b><span>Changes must be signed before '+r.renewal+'</span>',
+    future:'<b>Renews '+r.renewal+'</b><span>'+r.dtd+' days away -- begin conversations 90 days out</span>',
+    closed:'<b>Window closed this cycle</b><span>Renews '+r.renewal+' -- plan for next cycle</span>',
     past:'<b>Already renewed</b><span>Begin planning for the next cycle</span>',
     unknown:'<b>No renewal date on file</b><span>Add contract date to your next Salesforce export</span>'
   }[r.urgency]||'';
@@ -658,7 +658,7 @@ function openPanel(i){
 
   // CALL PREP PANE
   var p4='<div style="padding:4px 0">';
-  p4+='<div style="font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:16px">Generate an AI-powered pre-call brief using everything we know about this account — packages, deal history, whitespace, last touch, and more.</div>';
+  p4+='<div style="font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:16px">Generate an AI-powered pre-call brief using everything we know about this account -- packages, deal history, whitespace, last touch, and more.</div>';
   p4+='<button class="p-act primary" id="cp-btn" onclick="generateCallPrep('+i+')">&#9889; Generate Brief</button>';
   p4+='</div>';
   p4+='<div id="cp-out" style="margin-top:20px"></div>';
@@ -679,7 +679,7 @@ function openPanel(i){
   var openProds=(r.open_deals||[]).map(function(d){return d.opp;}).filter(Boolean);
   var dsa2=r.days_since_activity;
   var touchStr2=dsa2?dsa2+'d ago':'unknown';
-  var renewStr=r.urgency==='soon'?r.dtd+' days left — GET IT SIGNED':r.urgency==='future'?'Renews '+r.renewal+' ('+r.dtd+'d away)':'No renewal date on file';
+  var renewStr=r.urgency==='soon'?r.dtd+' days left -- GET IT SIGNED':r.urgency==='future'?'Renews '+r.renewal+' ('+r.dtd+'d away)':'No renewal date on file';
   
   var prep='<div style="display:flex;flex-direction:column;gap:16px">';
   
@@ -718,12 +718,12 @@ function openPanel(i){
   prep+='<div><div class="p-section-label">Suggested Talking Points</div>';
   prep+='<div style="display:flex;flex-direction:column;gap:8px">';
   var pts=[];
-  if(r.urgency==='soon') pts.push('Renewal is in '+r.dtd+' days — use this window to add '+( topProducts[0]||'new products')+' before it closes.');
-  if(dsa2&&dsa2>=60) pts.push('It has been '+dsa2+' days since last contact — check in on how the team is using the platform before pitching.');
-  if(wonProds.length) pts.push('You have already sold them '+wonProds[0]+' — reference that win to build credibility.');
-  if(lostProds.length) pts.push(lostProds[0]+' was previously lost — ask what changed before re-pitching it.');
-  if(openProds.length) pts.push('Active deal in progress: '+openProds[0]+' — check status before introducing new products.');
-  if(r.mrr&&upgTotal(r)>0) pts.push('Upgrade opportunity is +'+(Math.round(upgTotal(r)/r.mrr*100))+'% of their current MRR — frame it as growth, not cost.');
+  if(r.urgency==='soon') pts.push('Renewal is in '+r.dtd+' days -- use this window to add '+( topProducts[0]||'new products')+' before it closes.');
+  if(dsa2&&dsa2>=60) pts.push('It has been '+dsa2+' days since last contact -- check in on how the team is using the platform before pitching.');
+  if(wonProds.length) pts.push('You have already sold them '+wonProds[0]+' -- reference that win to build credibility.');
+  if(lostProds.length) pts.push(lostProds[0]+' was previously lost -- ask what changed before re-pitching it.');
+  if(openProds.length) pts.push('Active deal in progress: '+openProds[0]+' -- check status before introducing new products.');
+  if(r.mrr&&upgTotal(r)>0) pts.push('Upgrade opportunity is +'+(Math.round(upgTotal(r)/r.mrr*100))+'% of their current MRR -- frame it as growth, not cost.');
   if(!pts.length) pts.push('Focus on platform adoption and relationship before pitching new products.');
   pts.forEach(function(pt){
     prep+='<div style="display:flex;gap:10px;padding:10px 12px;background:var(--off);border-radius:8px;border:1px solid var(--bd-light)"><div style="color:var(--blue);font-size:14px;flex-shrink:0">&#9642;</div><div style="font-size:13px;color:var(--tx);line-height:1.5">'+pt+'</div></div>';
@@ -752,30 +752,7 @@ function buildCallPrep(r){
   var dsa=r.days_since_activity;
   var touchStatus=!dsa?'Unknown':dsa<14?'Recent ('+dsa+'d ago)':dsa<60?'Needs attention ('+dsa+'d ago)':'Cold - '+dsa+' days since last contact';
 
-  var prompt='You are a sales coach helping an Account Executive at Restaurant365 prepare for a customer call. Write a concise, confident pre-call brief in plain text (no markdown, no bullet symbols, use short paragraphs). Keep it under 200 words. Be specific and actionable.
-
-Account: '+r.n+'
-Location: '+r.ci+', '+r.st+'
-Locations: '+r.loc+' location'+(r.loc>1?'s':'')+'
-POS System: '+r.pos+'
-Customer since: '+r.cs+'
-Accounting package: '+(r.acct_pkg||'None')+'
-Operations package: '+(r.ops_pkg||'None')+'
-Current MRR: '+(r.mrr?'$'+Math.round(r.mrr)+'/mo':'Unknown')+'
-Whitespace opportunity: $'+r.ws.toLocaleString()+'/yr
-Account health: '+r.risk+'
-Last touched: '+touchStatus+'
-CSM: '+(r.csm||'Unknown')+'
-Key contact: '+dmName+'
-Top products to pitch: '+topPitch+'
-Package upgrades available: '+upgList+'
-Won since Dec 2025: '+wonProds+'
-Lost since Dec 2025: '+lostProds+'
-Open deals: '+openDeals+(r.expansion_news?'
-Expansion intel: '+r.expansion_news:'')+'
-
-Write a pre-call brief covering: (1) who you are calling and context, (2) what to lead with and why, (3) what to avoid or be careful about, (4) suggested opening line.';
-
+  
   return prompt;
 }
 
@@ -802,7 +779,7 @@ function generateCallPrep(i){
     var text=data.content&&data.content[0]?data.content[0].text:'Unable to generate brief.';
     out.innerHTML='<div style="font-size:13px;line-height:1.8;color:var(--tx);white-space:pre-wrap">'+text+'</div>'
       +'<div style="margin-top:16px;display:flex;gap:8px">'
-      +'<button class="p-act" onclick="navigator.clipboard.writeText(document.getElementById('cp-out').querySelector('div').textContent).then(function(){var b=event.target;b.textContent='Copied';setTimeout(function(){b.textContent='Copy Brief'},2000)})">Copy Brief</button>'
+      +'<button class="p-act" id="cpbtn" onclick="var t=document.getElementById(\'cp-out\').querySelector(\'div\').textContent;navigator.clipboard.writeText(t).then(function(){var b=document.getElementById(\'cpbtn\');b.textContent=\'Copied\';setTimeout(function(){b.textContent=\'Copy Brief\'},2000)})">Copy Brief</button>'
       +'<button class="p-act" onclick="generateCallPrep('+i+')">Regenerate</button>'
       +'</div>';
     btn.disabled=false;
