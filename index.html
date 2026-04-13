@@ -91,6 +91,9 @@ td{padding:14px 20px;vertical-align:middle}
 .ppill-pri{background:rgba(0,122,255,.1);color:var(--blue-dark)}
 .ppill-sec{background:rgba(255,159,10,.1);color:var(--amber-dark)}
 .ppill-more{background:var(--off);color:var(--t3);font-style:italic}
+.ppill-fit-g{background:rgba(48,209,88,.1);color:#1a7f37;font-weight:600}
+.ppill-fit-y{background:rgba(255,159,10,.1);color:#7d4e00;font-weight:600}
+.ppill-fit-r{background:rgba(255,59,48,.08);color:var(--red);font-weight:600}
 .ppill-dot{width:5px;height:5px;border-radius:50%}
 .pd-upg{background:var(--purple)}.pd-pri{background:var(--blue)}.pd-sec{background:var(--amber)}
 
@@ -418,8 +421,7 @@ function render(){
     var miss=r.missing||{};
     var mk=Object.keys(miss).sort(function(a,b){return(miss[b]||0)-(miss[a]||0);});
     // Build pitch pills - clean and minimal
-    var openFlag=(r.open_deals&&r.open_deals.length)?'<span class="ppill" style="background:rgba(0,122,255,.1);color:#0040dd"><span class="ppill-dot" style="background:var(--blue)"></span>In Progress</span>':'';
-    var pills=openFlag;
+    var pills='';
     var upgCount=0;
     (r.acct_upgrades||[]).forEach(function(u){
       if(upgCount<1){pills+='<span class="ppill ppill-upg"><span class="ppill-dot pd-upg"></span>'+u.to.replace(' Accounting','').replace(' Operations','')+'</span>';}
@@ -431,11 +433,12 @@ function render(){
     });
     var priCount=0;var secCount=0;
     mk.forEach(function(p){
-      if(KEY.indexOf(p)>=0&&priCount<2){pills+='<span class="ppill ppill-pri"><span class="ppill-dot pd-pri"></span>'+p.replace('Alliance ','').replace(' Management','')+'</span>';priCount++;}
-      else if(KEY.indexOf(p)<0&&secCount<1){pills+='<span class="ppill ppill-sec"><span class="ppill-dot pd-sec"></span>'+p+'</span>';secCount++;}
+      var f=productFit(p,r.acct_pkg,r.ops_pkg);
+      var bg=f===2?'rgba(48,209,88,.12)':f===1?'rgba(255,159,10,.12)':'rgba(255,59,48,.1)';
+      var col=f===2?'#1a7f37':f===1?'#7d4e00':'#c0392b';
+      pills+='<span class="ppill" style="background:'+bg+';color:'+col+';font-weight:600">'+p.replace('Alliance ','')+'</span>';
     });
-    var extra=(upgCount>1?upgCount-1:0)+(priCount>2?priCount-2:0)+(secCount>1?secCount-1:0);
-    if(extra)pills+='<span class="ppill ppill-more">+'+extra+'</span>';
+
 
     var dotCls=r.risk==='Green'?'dot-g':r.risk==='Yellow'?'dot-y':r.risk==='Red'?'dot-r':'dot-x';
     var riskTxtCls=r.risk==='Green'?'risk-g':r.risk==='Yellow'?'risk-y':r.risk==='Red'?'risk-r':'risk-x';
@@ -559,17 +562,6 @@ function openPanel(i){
 
   // PITCH PANE
   var p0='';
-  // Show news banner at top of pitch pane if account has news
-  if(r.news){
-    var ni=r.news.type==='expansion'?'&#128640;':r.news.type==='alert'?'&#9888;':'&#128240;';
-    var nc=r.news.type==='expansion'?'rgba(0,122,255,.06)':'rgba(255,159,10,.06)';
-    var nb=r.news.type==='expansion'?'rgba(0,122,255,.15)':'rgba(255,159,10,.2)';
-    var nt=r.news.type==='expansion'?'var(--blue-dark)':'var(--amber-dark)';
-    p0+='<div style="background:'+nc+';border:1px solid '+nb+';border-radius:8px;padding:10px 14px;margin-bottom:16px;display:flex;gap:10px;align-items:flex-start">';
-    p0+='<div style="font-size:16px;flex-shrink:0">'+ni+'</div>';
-    p0+='<div><div style="font-size:12px;font-weight:600;color:'+nt+';margin-bottom:2px">'+r.news.headline+'</div>';
-    p0+='<div style="font-size:11px;color:var(--t2)">'+r.news.source+' &middot; '+r.news.date+'</div></div></div>';
-  }
   var upgRows='';
   (r.acct_upgrades||[]).forEach(function(u){
     var f=productFit(u.to,r.acct_pkg,r.ops_pkg);
