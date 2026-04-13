@@ -419,6 +419,15 @@ td{padding:14px 20px;vertical-align:middle}
     <option value="locs">Locations</option>
     <option value="name">Name</option>
   </select>
+  <select class="sort-sel" id="act-filter" onchange="render()">
+    <option value="all">All Activity</option>
+    <option value="7">Active &lt; 7 days</option>
+    <option value="30">Active &lt; 30 days</option>
+    <option value="60">Active &lt; 60 days</option>
+    <option value="90">Active &lt; 90 days</option>
+    <option value="90plus">Cold 90+ days</option>
+    <option value="never">No Activity Logged</option>
+  </select>
   <div class="row-count" id="rcount">371 accounts</div>
 </div>
 
