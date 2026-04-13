@@ -539,7 +539,7 @@ function openPanel(i){
   var upgPct=r.mrr&&upg?'+'+Math.round(upg/r.mrr*100)+'%':'';
   var upgStr=upg?'+'+fmt(upg)+'/mo'+(upgPct?' <span style="font-size:12px;color:var(--purple-dark);font-weight:500">('+upgPct+')</span>':''):'&mdash;';
   document.getElementById('ps').innerHTML=
-    '<div class="p-stat"><div class="p-stat-l">Current MRR</div><div class="p-stat-v blue">'+mrrStr+'</div></div>'
+    '<div class="p-stat"><div class="p-stat-l">Current MRR</div><div class="p-stat-v blue">'+mrrStr+'</div>'+(r.billing_frequency&&r.mrr?'<div style="font-size:11px;color:var(--t2);margin-top:3px;font-weight:500">'+(r.billing_frequency==='Monthly'?'$'+Math.round(r.mrr).toLocaleString()+'/mo':r.billing_frequency==='Quarterly'?'$'+Math.round(r.mrr*3).toLocaleString()+'/qtr':r.billing_frequency==='Annually'?'$'+Math.round(r.mrr*12).toLocaleString()+'/yr':r.billing_frequency==='Semi-Annual'?'$'+Math.round(r.mrr*6).toLocaleString()+'/6mo':'')+'</div>':'')+'</div>'
     +'<div class="p-stat"><div class="p-stat-l">Whitespace</div><div class="p-stat-v red">$'+r.ws.toLocaleString()+'</div></div>'
     +'<div class="p-stat"><div class="p-stat-l">Upgrade Opportunity</div><div class="p-stat-v purple">'+upgStr+'</div></div>'
     +'<div class="p-stat"><div class="p-stat-l">Last Touched</div><div class="p-stat-v" style="font-size:15px" '+lastTouchColor+'>'+lastTouchStr+'</div></div>';
