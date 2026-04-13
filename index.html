@@ -445,8 +445,7 @@ function render(){
 
     h+='<tr class="'+rowCls+'" onclick="openPanel('+i+')">';
     var coldBadge=(r.days_since_activity&&r.days_since_activity>=90)?'<span style="display:inline-block;margin-left:6px;font-size:10px;font-weight:600;padding:1px 6px;border-radius:4px;background:rgba(255,59,48,.08);color:var(--red)">'+r.days_since_activity+'d cold</span>':'';
-    var newsBadge=r.news?'<span style="display:inline-block;margin-left:6px;font-size:10px;font-weight:600;padding:1px 6px;border-radius:4px;background:rgba(0,122,255,.08);color:var(--blue-dark)">In News</span>':'';
-    var newsBadge=r.expansion_news?'<span style="display:inline-block;margin-left:6px;font-size:10px;font-weight:700;padding:1px 6px;border-radius:4px;background:rgba(0,122,255,.08);color:var(--blue-dark)" title="Expansion intel available">&#9889; News</span>':'';
+    var newsBadge=r.news?'<span style="display:inline-block;margin-left:6px;font-size:10px;font-weight:700;padding:1px 6px;border-radius:4px;background:rgba(0,122,255,.1);color:var(--blue-dark)">&#128240; News</span>':'';
     h+='<td><div class="acct-name">'+r.n+coldBadge+newsBadge+'</div><div class="acct-loc">'+r.ci+', '+r.st+'</div></td>';
     h+='<td><div class="risk-dot '+riskTxtCls+'"><span class="dot '+dotCls+'"></span>'+r.risk+'</div></td>';
     h+='<td><div class="loc-num">'+r.loc+'</div><div class="pos-txt">'+r.pos+'</div></td>';
