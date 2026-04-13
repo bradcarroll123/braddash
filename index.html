@@ -236,7 +236,7 @@ td{padding:14px 20px;vertical-align:middle}
   <div class="nav-center">
     <div class="nav-tabs">
       <button class="ntab active" onclick="setFilter('all',this)">All</button>
-      <button class="ntab" onclick="setFilter('soon',this)">Closing Soon</button>
+      <button class="ntab" onclick="setFilter('soon',this)">Renewing Soon</button>
       <button class="ntab" onclick="setFilter('toppriority',this)">Top Priority</button>
       <button class="ntab" onclick="setFilter('upgrades',this)">Upgrades</button>
       <button class="ntab news-tab" onclick="setFilter('hasnews',this)">&#128240; In the News</button>
@@ -268,6 +268,14 @@ td{padding:14px 20px;vertical-align:middle}
   <div class="row-count" id="rcount">371 accounts</div>
 </div>
 
+<div style="background:#fffbf0;border-bottom:1px solid #e4e7ec;padding:7px 24px;display:flex;align-items:center;gap:20px;flex-shrink:0;font-size:11px;color:#475467">
+  <span style="font-weight:600;color:#98a2b3;text-transform:uppercase;letter-spacing:.5px">Legend:</span>
+  <span style="display:flex;align-items:center;gap:6px"><span style="width:3px;height:16px;background:#f59e0b;border-radius:2px;display:inline-block"></span>Renewing Soon (renewal &lt;90 days)</span>
+  <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:rgba(48,209,88,.12);border:1px solid rgba(48,209,88,.3);display:inline-block"></span>Good fit — pitch with confidence</span>
+  <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:rgba(255,159,10,.12);border:1px solid rgba(255,159,10,.3);display:inline-block"></span>Okay fit — worth mentioning</span>
+  <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:rgba(255,59,48,.1);border:1px solid rgba(255,59,48,.2);display:inline-block"></span>Low fit — skip for now</span>
+  <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.3);display:inline-block"></span>Package upgrade available &#8679;</span>
+</div>
 <div class="table-scroll">
 <table>
   <thead>
@@ -288,7 +296,7 @@ td{padding:14px 20px;vertical-align:middle}
 
 <div class="status-bar">
   <div class="sb-item">Total Opportunity <span class="red" id="sw">--</span></div>
-  <div class="sb-item">Closing Soon <b id="ss">--</b></div>
+  <div class="sb-item">Renewing Soon <b id="ss">--</b></div>
   <div class="sb-item">Package Upgrades <b id="su">--</b></div>
   <div class="sb-sep"></div>
   <div class="sb-item" id="sc">371 accounts</div>
