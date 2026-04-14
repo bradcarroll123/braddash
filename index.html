@@ -738,10 +738,18 @@ function openPanel(i){
   if(r.renewal_month){
     var upliftColor=r.uplift_pct===0?'#ff3b30':'#34c759';
     var upliftLabel=r.uplift_pct===0?'0%':'+'+r.uplift_pct+'%';
+    var upliftDollar='';
+    if(r.uplift_pct>0&&r.renewal_mrr){
+      var dollarIncrease=Math.round(r.renewal_mrr*(r.uplift_pct/100));
+      upliftDollar='<span style="font-size:11px;font-weight:600;color:#34c759;margin-left:4px">+$'+dollarIncrease.toLocaleString()+'/mo</span>';
+    }
     renewalHtml='<div style="background:rgba(255,149,0,.08);border:1px solid rgba(255,149,0,.25);border-radius:8px;padding:8px 12px;margin-bottom:12px;display:flex;align-items:center;gap:10px">'
       +'<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#b96a00;white-space:nowrap">Renews '+r.renewal_month+'</div>'
       +(r.renewal_mrr?'<div style="font-size:12px;font-weight:600;color:var(--tx)">$'+r.renewal_mrr.toLocaleString()+'/mo</div>':'')
-      +'<span style="background:'+upliftColor+';color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px;margin-left:auto">'+upliftLabel+'</span>'
+      +'<div style="margin-left:auto;display:flex;align-items:center;gap:6px">'
+      +upliftDollar
+      +'<span style="background:'+upliftColor+';color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px">'+upliftLabel+'</span>'
+      +'</div>'
       +'</div>';
   }
   document.getElementById('ps').innerHTML=renewalHtml+
