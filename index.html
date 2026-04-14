@@ -734,7 +734,18 @@ function openPanel(i){
   var mrrStr=r.mrr?'$'+Math.round(r.mrr).toLocaleString()+'/mo':'&mdash;';
   var upgPct=r.mrr&&upg?'+'+Math.round(upg/r.mrr*100)+'%':'';
   var upgStr=upg?'+'+fmt(upg)+'/mo'+(upgPct?' <span style="font-size:12px;color:var(--purple-dark);font-weight:500">('+upgPct+')</span>':''):'&mdash;';
-  document.getElementById('ps').innerHTML=
+  var renewalHtml='';
+  if(r.renewal_month){
+    var upliftColor=r.uplift_pct===0?'#ff3b30':'#34c759';
+    var upliftLabel=r.uplift_pct===0?'0% UPLIFT - CHURN RISK':'+'+r.uplift_pct+'% uplift';
+    renewalHtml='<div style="background:rgba(255,149,0,.08);border:1px solid rgba(255,149,0,.25);border-radius:10px;padding:10px 14px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between">'
+      +'<div><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#b96a00">Renews '+r.renewal_month+'</div>'
+      +(r.renewal_mrr?'<div style="font-size:13px;font-weight:600;color:var(--tx);margin-top:2px">$'+r.renewal_mrr.toLocaleString()+'/mo</div>':'')
+      +'</div>'
+      +'<span style="background:'+upliftColor+';color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px">'+upliftLabel+'</span>'
+      +'</div>';
+  }
+  document.getElementById('ps').innerHTML=renewalHtml+
     '<div class="p-stat"><div class="p-stat-l">Current MRR</div><div class="p-stat-v blue">'+mrrStr+'</div>'+(r.billing_frequency&&r.mrr?'<div style="font-size:11px;color:var(--t2);margin-top:3px;font-weight:500">'+(r.billing_frequency==='Monthly'?'$'+Math.round(r.mrr).toLocaleString()+'/mo':r.billing_frequency==='Quarterly'?'$'+Math.round(r.mrr*3).toLocaleString()+'/qtr':r.billing_frequency==='Annually'?'$'+Math.round(r.mrr*12).toLocaleString()+'/yr':r.billing_frequency==='Semi-Annual'?'$'+Math.round(r.mrr*6).toLocaleString()+'/6mo':'')+'</div>':'')+'</div>'
     +'<div class="p-stat"><div class="p-stat-l">Whitespace</div><div class="p-stat-v red">$'+r.ws.toLocaleString()+'</div></div>'
     +'<div class="p-stat"><div class="p-stat-l">Upgrade Opportunity</div><div class="p-stat-v purple">'+upgStr+'</div></div>'
