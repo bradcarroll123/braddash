@@ -725,6 +725,7 @@ function openPanel(i){
   links+='<a class="p-act" href="https://news.google.com/search?q='+encodeURIComponent(r.n+' restaurant')+'" target="_blank" rel="noopener">&#128240; News</a>';
   links+='<a class="p-act" href="https://www.google.com/search?q='+encodeURIComponent(r.n+' restaurant new location opening 2025 2026')+'" target="_blank" rel="noopener">&#128269; Expansion</a>';
   links+='<a class="p-act" href="https://www.linkedin.com/search/results/companies/?keywords='+encodeURIComponent(r.n)+'" target="_blank" rel="noopener">LinkedIn</a>';
+  if(r.sfid){links+='<a class="p-act" href="https://compeat.lightning.force.com/lightning/r/Account/'+r.sfid+'/view" target="_blank" style="background:var(--blue);color:#fff;border-color:transparent">⚡ Salesforce</a>';}
   document.getElementById('pa').innerHTML=links;
 
   var daysSince=r.days_since_activity;
